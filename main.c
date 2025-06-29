@@ -18,7 +18,7 @@ ssize_t rui_read(struct file *file_pointer,
         printk(KERN_INFO "rui read\n");
         return 0;
     }
-struct proc_ops driver_proc_ops = {
+static struct proc_ops driver_proc_ops = {
         .proc_read = rui_read
     };
     
@@ -26,6 +26,10 @@ struct proc_ops driver_proc_ops = {
 static int __init hello_init(void) {
     printk(KERN_INFO "Hello, kernel main!\n");
     custom_proc_node = proc_create("my_driver",0,NULL,&driver_proc_ops);
+    if(custom_proc_node == NULL){
+        printk(KERN_INFO "init error\n");
+        return -1;
+    }
     return 0;
 }
 static void __exit hello_exit(void) {
