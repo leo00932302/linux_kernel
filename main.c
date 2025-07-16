@@ -12,7 +12,7 @@ MODULE_DESCRIPTION("A simple module");
 //proc function 
 static struct proc_dir_entry *custom_proc_node;
 ssize_t rui_read(struct file *file_pointer,
-                 char* user_space_buffer,
+                 char __user* user_space_buffer,
                  size_t count,
                  loff_t* offset){
         int result;
@@ -26,7 +26,8 @@ ssize_t rui_read(struct file *file_pointer,
         return len;
     }
 static struct proc_ops driver_proc_ops = {
-        .proc_read = rui_read
+        .proc_read = rui_read,
+        .proc_lseek = default_llseek
     };
     
 //finction defination
