@@ -15,8 +15,15 @@ ssize_t rui_read(struct file *file_pointer,
                  char* user_space_buffer,
                  size_t count,
                  loff_t* offset){
+        int result;
+        char msg[] = "hello\n";
+        
+        size_t len = strlen(msg);
+        if(*offset>=len) return 0;
         printk(KERN_INFO "rui read\n");
-        return 0;
+        result = copy_to_user(user_space_buffer,msg,len);
+        *offset += len;
+        return len;
     }
 static struct proc_ops driver_proc_ops = {
         .proc_read = rui_read
