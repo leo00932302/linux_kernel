@@ -1,7 +1,7 @@
 This kernel module was created to help you learn the basic functionalities of a Linux module.
 It demonstrates how to create a module from scratch and how to use the virtual file system, known as proc, to interact with user-space applications.
 Some VSCode configurations are provided below — feel free to modify the paths as needed.
-``` json
+```
 {
     "configurations": [
         {
